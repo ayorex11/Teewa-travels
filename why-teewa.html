@@ -44,6 +44,14 @@
   }
 }
 </script>
+<style>
+  /* Fix: mobile text overlap in the "Proof Stats Bar" (Personalized / NGN & USD / Bespoke / Hands-On).
+     Grid items default to min-width:auto, which stops long headline text from wrapping
+     and makes it overflow into the next column. This forces it to wrap instead. */
+  .grid.grid-cols-2.md\:grid-cols-4 > div {
+    min-width: 0;
+  }
+</style>
 </head>
 <body class="bg-surface font-body-md text-on-surface antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed">
 <header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
