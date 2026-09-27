@@ -1,0 +1,32 @@
+/* ==========================================
+   Teewa Travels & Tour — shared stylesheet
+   ========================================== */
+
+@layer base {
+  html, body { margin: 0; padding: 0; }
+  body { overscroll-behavior: none; }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
+}
+
+::-webkit-scrollbar { display: none; }
+
+/* Mobile nav drawer (toggled by js/main.js) */
+.mobile-nav { display: none; }
+.mobile-nav.open { display: flex; }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #0EA5E9;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ping, .animate-pulse {
+    animation: none !important;
+  }
+  * { transition-duration: 0.01ms !important; }
+}
