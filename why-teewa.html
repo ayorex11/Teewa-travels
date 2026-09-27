@@ -46,10 +46,30 @@
 </script>
 <style>
   /* Fix: mobile text overlap in the "Proof Stats Bar" (Personalized / NGN & USD / Bespoke / Hands-On).
-     Grid items default to min-width:auto, which stops long headline text from wrapping
-     and makes it overflow into the next column. This forces it to wrap instead. */
-  .grid.grid-cols-2.md\:grid-cols-4 > div {
+     Root cause: "Personalized" is a single unbroken word. Letting the grid box shrink
+     (min-width:0) doesn't help because there's no space inside the word to wrap at —
+     the text just overflows past its own box edge (overflow is visible by default).
+     Real fix: give each stat its own full-width row on narrow phones so the word
+     never needs to fit inside a half-width column in the first place. This uses
+     plain CSS with its own media queries, not Tailwind's grid-cols utilities, so
+     there's no ambiguity about whether it's being applied. */
+  .proof-stats-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+  }
+  .proof-stats-grid > div {
     min-width: 0;
+  }
+  @media (min-width: 480px) {
+    .proof-stats-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+  @media (min-width: 768px) {
+    .proof-stats-grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
   }
 </style>
 </head>
@@ -140,7 +160,7 @@
 </div>
 </div>
 <!-- Proof Stats Bar (Architectural Ribbon) -->
-<div class="w-full bg-primary-container text-on-primary rounded-xl p-space-xl shadow-xl grid grid-cols-2 md:grid-cols-4 gap-space-lg text-center">
+<div class="proof-stats-grid w-full bg-primary-container text-on-primary rounded-xl p-space-xl shadow-xl grid grid-cols-2 md:grid-cols-4 gap-space-lg text-center">
 <div class="flex flex-col min-w-0">
 <span class="font-headline-lg text-headline-md md:text-headline-lg text-tertiary-fixed font-bold">Personalized</span>
 <span class="font-label-md text-label-md text-primary-fixed-dim uppercase tracking-wider mt-1">Booking &amp; Support</span>
